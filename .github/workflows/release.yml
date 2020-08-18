@@ -22,7 +22,7 @@ jobs:
 
       - name: Install goreleaser
         run: |
-          - go install github.com/goreleaser/goreleaser
+          go install github.com/goreleaser/goreleaser
 
       - name: Run release
         run: |
