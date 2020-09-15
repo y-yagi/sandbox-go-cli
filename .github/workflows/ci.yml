@@ -27,14 +27,14 @@ jobs:
     - name: Run lint
       run: |
         go get -u golang.org/x/lint/golint
-        $(go env GOPATH)/bin/golint -set_exit_status
+        golint -set_exit_status
       env:
         GO111MODULE: on
 
     - name: Run golangci-lint
       run: |
         curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.23.8
-        $(go env GOPATH)/bin/golangci-lint run --disable errcheck
+        golangci-lint run --disable errcheck
       env:
         GO111MODULE: on
 
