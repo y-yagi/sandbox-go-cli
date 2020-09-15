@@ -22,6 +22,6 @@ jobs:
 
       - name: Run release
         run: |
-          goreleaser release --rm-dist -f .goreleaser-windows.yml
+          goreleaser.exe release --rm-dist -f .goreleaser-windows.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
