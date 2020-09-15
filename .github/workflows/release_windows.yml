@@ -12,10 +12,12 @@ jobs:
     runs-on: windows-latest
     steps:
 
-      - name: Set up Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.14
+      - name: Install goreleaser
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+          iwr -useb get.scoop.sh | iex
+          scoop bucket add goreleaser https://github.com/goreleaser/scoop-bucket.git
+          scoop install goreleaser
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
