@@ -1,5 +1,10 @@
 name: Release
-on: [push]
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   linux:
@@ -14,7 +19,7 @@ jobs:
 
       - name: Run release
         run: |
-          goreleaser release --skip-validate --skip-publish --rm-dist -f .goreleaser-linux.yml
+          goreleaser release --rm-dist -f .goreleaser-linux.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -30,7 +35,7 @@ jobs:
 
       - name: Run release
         run: |
-          goreleaser release --skip-validate --skip-publish --rm-dist -f .goreleaser-darwin.yml
+          goreleaser release --rm-dist -f .goreleaser-darwin.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -50,6 +55,6 @@ jobs:
 
       - name: Run release
         run: |
-          C:\Users\runneradmin\scoop\shims\goreleaser.exe release - release --skip-validate --skip-publish --rm-dist -f .goreleaser-windows.yml
+          C:\Users\runneradmin\scoop\shims\goreleaser.exe release - release --rm-dist -f .goreleaser-windows.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
