@@ -2,13 +2,12 @@ builds:
   - env:
     - CGO_ENABLED=0
     goos:
-      - windows
-    ldflags: -H windowsgui
+      - linux
     goarch:
       - amd64
       - 386
 checksum:
-  name_template: 'checksums-windows.txt'
+  name_template: 'checksums-linux.txt'
 snapshot:
   name_template: "{{ .Tag }}-next"
 changelog:
