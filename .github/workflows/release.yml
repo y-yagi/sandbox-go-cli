@@ -55,6 +55,6 @@ jobs:
 
       - name: Run release
         run: |
-          C:\Users\runneradmin\scoop\shims\goreleaser.exe release - release --rm-dist -f .goreleaser-windows.yml
+          C:\Users\runneradmin\scoop\shims\goreleaser.exe release --rm-dist -f .goreleaser-windows.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
