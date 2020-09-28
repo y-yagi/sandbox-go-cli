@@ -1,0 +1,38 @@
+name: Release
+on: [push]
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install goreleaser
+        run: |
+          sudo snap install --classic goreleaser
+
+      - name: Run release
+        run: |
+          goreleaser release --skip-validate --skip-publish --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: Install goreleaser
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+          iwr -useb get.scoop.sh | iex
+          scoop bucket add goreleaser https://github.com/goreleaser/scoop-bucket.git
+          scoop install goreleaser
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+
+      - name: Run release
+        run: |
+          C:\Users\runneradmin\scoop\shims\goreleaser.exe release - release --skip-validate --skip-publish --rm-dist -f .goreleaser-windows.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
