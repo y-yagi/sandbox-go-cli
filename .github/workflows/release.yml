@@ -14,9 +14,26 @@ jobs:
 
       - name: Run release
         run: |
-          goreleaser release --skip-validate --skip-publish --rm-dist
+          goreleaser release --skip-validate --skip-publish --rm-dist -f .goreleaser-linux.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  darwin:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install goreleaser
+        run: |
+          brew install goreleaser/tap/goreleaser
+
+      - name: Run release
+        run: |
+          goreleaser release --skip-validate --skip-publish --rm-dist -f .goreleaser-darwin.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
   windows:
     runs-on: windows-latest
